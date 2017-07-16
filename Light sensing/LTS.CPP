@@ -6,6 +6,9 @@
 int gobaltime = 0;
 int seventimex = 0;
 int seventimey = 0;
+bool svx;
+bool svy;
+
 int xtime[120];
 int ytime[120];
 int ztime[120];
@@ -14,6 +17,7 @@ int trtimey = 0;
 int x,y;
 int i;
 bool c = true;
+bool LightIsOn = false;   //light ready ON
 
 
 void stp_trtimex(){
@@ -24,6 +28,8 @@ trtimex = 0;
 void str_trtimex(){
 if(trtimex >= 3){   //check 3time x
 trtimex = 0;
+svx = true;
+
 }
 trtimex++;
 
@@ -35,8 +41,9 @@ trtimey = 0;
 }
 
 void str_trtimey(){
- if(trtimey >= 3){
+ if(trtimey >= 3){   // check 3time y
  trtimey = 0;
+ svy = true;
  }
 trtimey++;
 
@@ -71,6 +78,26 @@ printf(" %d",ztime[i]);
 
 int main() {
 while(c){
+
+if(LightIsOn){
+ ztime[gobaltime] = 1;
+
+ }
+
+ if(!LightIsOn){
+ ztime[gobaltime] = 0;
+ }
+
+ if(ztime[gobaltime] == 1){
+ svx = false;
+ seventimex = 0;
+
+ }
+ if(ztime[gobaltime] == 0) {
+ svy = false;
+ seventimey = 0;
+ }
+
 print();
 printf("\nInsert X :");
 scanf("%d",&x);
@@ -100,6 +127,7 @@ str_trtimey();
             stp_trtimey();
      }
 
+
 }
 else {
 	stp_trtimey();
@@ -113,6 +141,34 @@ getch();
 return 0;
 
 }
+ if(seventimex >= 7){
+  seventimex = 0;
+  svx = false;
+  LightIsOn = false;
+ }
+ if(seventimey >= 7){
+ seventimey = 0;
+ svy = false;
+
+
+ }
+
+ if(svx){
+ seventimex++;
+   if(ytime[gobaltime] == 1){
+   LightIsOn = true;
+   }
+ }
+ if(svy){
+ seventimey++;
+   if(xtime[gobaltime] == 1)
+   {
+   LightIsOn = false;
+   }
+
+ }
+
+
 
  gobaltime++;
 
